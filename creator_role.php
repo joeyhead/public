@@ -117,6 +117,7 @@ add_action( 'init', function () {
         'edit_private_lessons', 'edit_published_lessons',
         'publish_lessons', 'read_private_lessons',
         'delete_lessons', 'delete_others_lessons',
+        'delete_private_lessons', 'delete_published_lessons',
 
     ];
 
