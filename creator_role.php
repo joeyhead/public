@@ -1,35 +1,19 @@
 <?php
 // Creator role with capabilities limited to the 'video' and 'lesson' CPTs.
 
-// Map 'video' CPT to custom capability_type before it is registered.
+// Map selected CPTs to custom capability_type before they are registered.
 add_filter( 'register_post_type_args', function ( $args, $post_type ) {
 
-    if ( 'video' !== $post_type ) {
+    $configured_cpts = [
+        'video'  => [ 'video', 'videos' ],
+        'lesson' => [ 'lesson', 'lessons' ],
+    ];
+
+    if ( ! isset( $configured_cpts[ $post_type ] ) ) {
         return $args;
     }
 
-    $args['capability_type'] = [ 'video', 'videos' ];
-    $args['map_meta_cap']    = true;
-
-    if ( ! isset( $args['supports'] ) ) {
-        $args['supports'] = [ 'title', 'editor', 'thumbnail', 'author' ];
-    } elseif ( is_array( $args['supports'] ) && ! in_array( 'author', $args['supports'], true ) ) {
-        $args['supports'][] = 'author';
-    }
-
-    return $args;
-
-}, 1, 2 );
-
-
-// Map 'lesson' CPT to custom capability_type before it is registered.
-add_filter( 'register_post_type_args', function ( $args, $post_type ) {
-
-    if ( 'lesson' !== $post_type ) {
-        return $args;
-    }
-
-    $args['capability_type'] = [ 'lesson', 'lessons' ];
+    $args['capability_type'] = $configured_cpts[ $post_type ];
     $args['map_meta_cap']    = true;
 
     if ( ! isset( $args['supports'] ) ) {
