@@ -58,6 +58,12 @@ add_action( 'init', function () {
         'publish_videos'          => true,
         'delete_videos'           => true,
         'delete_published_videos' => true,
+        'create_lessons'           => true,
+        'edit_lessons'             => true,
+        'edit_published_lessons'   => true,
+        'publish_lessons'          => true,
+        'delete_lessons'           => true,
+        'delete_published_lessons' => true,
     ];
 
     $caps_deny = [
